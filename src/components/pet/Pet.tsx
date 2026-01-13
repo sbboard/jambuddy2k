@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { incrementStats } from '../../store/gameSlice';
 import { useAppDispatch } from '../../app/hooks';
 
-const MS_PER_TICK = 1000;
+const MS_PER_TICK = 2000;
 
 export const Pet = () => {
     const dispatch = useAppDispatch();
