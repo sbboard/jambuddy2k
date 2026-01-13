@@ -12,7 +12,7 @@ export const Screen = () => {
         let mood = 'normal';
         if (sleep <= SLEEPLENGTH) mood = 'drowsy';
         else if (hunger <= 1) mood = 'eat';
-        else if (health <= MAX_HEALTH * 0.25) mood = 'cry';
+        if (health <= MAX_HEALTH * 0.25) mood = 'cry';
         return `/assets/pets/${String(stage)}/${mood}.jpg`;
     }, [hunger, sleep, health, stage]);
 
