@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-const MAX_HEALTH = 50;
-const MAX_HUNGER = 3;
-const HOURS_PER_DAY = 24;
-const MAX_AGE = 80;
-const MEALS_PER_DAY = 3;
-
-const STAGE_ONE_EVOLVE = 6;
-const STAGETWOEVOLVE = 20;
+import {
+    HOURS_PER_DAY,
+    MAX_AGE,
+    MAX_HEALTH,
+    MAX_HUNGER,
+    MEALS_PER_DAY,
+    STAGE_ONE_EVOLVE,
+    STAGETWOEVOLVE,
+} from '../const/rules';
 
 type GameState = {
     hunger: number;

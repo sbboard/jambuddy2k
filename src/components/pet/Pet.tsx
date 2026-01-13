@@ -3,8 +3,7 @@ import { Controls } from './Controls/Controls';
 import { useEffect } from 'react';
 import { incrementStats } from '../../store/gameSlice';
 import { useAppDispatch } from '../../app/hooks';
-
-const MS_PER_TICK = 2000;
+import { MS_PER_TICK } from '../../const/rules';
 
 export const Pet = () => {
     const dispatch = useAppDispatch();
