@@ -1,18 +1,22 @@
 import { useEffect } from 'react';
 import './App.css';
-import { useAppDispatch, useAppSelector } from './store/hooks';
 import { incrementStats, feedPet, restPet } from './store/gameSlice';
+import { useAppDispatch, useAppSelector } from './app/hooks';
 
 export const App = () => {
     const dispatch = useAppDispatch();
-    const { hunger, sleep, age } = useAppSelector(state => state.game);
+    const hunger = useAppSelector(state => state.game.hunger);
+    const sleep = useAppSelector(state => state.game.sleep);
+    const age = useAppSelector(state => state.game.age);
 
     useEffect(() => {
         const interval = setInterval(() => {
             dispatch(incrementStats());
         }, 1000);
 
-        return () => clearInterval(interval);
+        return () => {
+            clearInterval(interval);
+        };
     }, [dispatch]);
 
     const handleFeed = () => {
