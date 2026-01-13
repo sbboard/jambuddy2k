@@ -4,7 +4,7 @@ import './Screen.sass';
 import { MAX_HEALTH, SLEEPLENGTH } from '../../../const/rules';
 
 export const Screen = () => {
-    const { hunger, sleep, health, stage } = useAppSelector(
+    const { hunger, sleep, health, stage, action } = useAppSelector(
         state => state.game
     );
 
@@ -12,9 +12,10 @@ export const Screen = () => {
         let mood = 'normal';
         if (sleep <= SLEEPLENGTH) mood = 'drowsy';
         else if (hunger <= 1) mood = 'eat';
-        if (health <= MAX_HEALTH * 0.25) mood = 'cry';
+        if (health <= MAX_HEALTH * 0.25) mood = 'sick';
+        if (action?.type) mood = String(action.type);
         return `/assets/pets/${String(stage)}/${mood}.jpg`;
-    }, [hunger, sleep, health, stage]);
+    }, [hunger, sleep, health, stage, action]);
 
     return (
         <div className="screen">

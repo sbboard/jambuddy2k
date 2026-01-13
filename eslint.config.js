@@ -62,6 +62,7 @@ export default [
           disallowTypeAnnotations: true,
         },
       ],
+      "@typescript-eslint/no-unsafe-member-access": "off",
       "no-restricted-imports": [
         2,
         {
