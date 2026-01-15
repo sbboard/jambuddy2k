@@ -16,3 +16,15 @@ export const STAGETWOEVOLVE = 20;
 
 //sleep data
 export const SLEEPLENGTH = 8;
+
+export const MOODS = [
+    'normal',
+    'drowsy',
+    'eat',
+    'sick',
+    'reject',
+    'sleep',
+] as const;
+
+export type Moods = (typeof MOODS)[number];
+export const PET_STAGES = [1, 2, 3];
