@@ -1,4 +1,5 @@
-html,body{
+html,
+body {
     width: 100%;
     height: 100%;
 }
@@ -10,4 +11,9 @@ html,body{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.App {
+    background-size: cover;
+    background: linear-gradient(to bottom, #ff4c97, #feaf7b);
 }
