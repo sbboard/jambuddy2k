@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { incrementStats } from '../../store/gameSlice';
 import { useAppDispatch } from '../../app/hooks';
 import { MS_PER_TICK } from '../../const/rules';
+import { BottomMenu } from '../pet/BottomMenu/BottomMenu';
 import './Pet.scss'
 
 export const Pet = () => {
@@ -22,6 +23,7 @@ export const Pet = () => {
     return (
         <div className='shell'>
             <Screen />
+            <BottomMenu />
             <Controls />
         </div>
     );

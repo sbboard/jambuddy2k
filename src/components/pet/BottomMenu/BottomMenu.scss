@@ -1,0 +1,19 @@
+.bottom-menu {
+    margin: auto;
+    position: absolute;
+    font-size: 4px;
+    margin: auto;
+    right: 0;
+    left: 0;
+    padding: 2px;
+    width: 28px;
+    line-height: 0;
+    top: 48px;
+    display: flex;
+    justify-content: space-around;
+    svg {
+        opacity: .15;
+        transition: opacity 0.1s;
+
+    }
+}
