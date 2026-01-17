@@ -12,7 +12,7 @@ import {
     STARTING_HUNGER,
 } from '../const/rules';
 
-type GameState = {
+export type GameState = {
     hunger: number;
     sleep: number;
     age: number;
