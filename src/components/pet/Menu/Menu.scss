@@ -3,21 +3,22 @@
 .menu {
     background-color: #c4b8bd;
     position: absolute;
-    width: 32px;
+    width: 34px;
     box-sizing: border-box;
     margin: auto;
     font-size: 4px;
     right: 0;
     left: 0;
-    padding: 1px;
-    height: 8px;
+    padding: 1px 2px;
+    height: 9px;
     line-height: 0;
     display: flex;
     justify-content: space-around;
     align-items: center;
 
     &.top {
-        top: 24px;
+        top: 23px;
+        padding-top: 1px;
 
         div {
             display: flex;
@@ -38,6 +39,7 @@
     &.bottom {
         top: 48px;
         font-size: 6px;
+        padding-bottom: 1px;
 
         svg {
             opacity: .15;

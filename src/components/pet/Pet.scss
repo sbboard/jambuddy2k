@@ -1,7 +1,16 @@
 .shell {
     width: 66px;
     height: 78px;
-    background: url('/assets/shell/main.png');
+    background: url('/assets/shell/main_hq.png');
     position: relative;
     transform: scale(5);
+    background-size: contain;
+
+    .shell-image {
+        position: absolute;
+        top: 0;
+        z-index: 1;
+        pointer-events: none;
+        width: 100%;
+    }
 }
