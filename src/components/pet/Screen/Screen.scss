@@ -9,13 +9,45 @@
     position: absolute;
     background-size: contain;
 
-    img {
+    .scene {
+        mix-blend-mode: color-burn;
         position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
         margin: 0 auto;
-        image-rendering: pixelated;
-        mix-blend-mode: color-burn;
+        display: flex;
+        height: 100%;
+        align-items: end;
+        justify-content: center;
+
+        img {
+            image-rendering: pixelated;
+
+            &.bg {
+                position: absolute;
+                z-index: -1;
+            }
+
+            &.status,
+            &.prop,
+            &.spacer {
+                padding: 0 1px;
+                background-color: white;
+            }
+
+            &.status {
+                margin-bottom: auto;
+            }
+
+            &.prop {
+                margin-top: auto;
+            }
+
+            &.spacer {
+                opacity: 0;
+            }
+        }
+
     }
 }

@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
+    EATLENGTH,
     HOURS_PER_DAY,
     MAX_AGE,
     MAX_HEALTH,
@@ -19,7 +20,7 @@ type GameState = {
     stage: number;
     tickCount: number;
     action: {
-        type: 'sleep' | 'reject' | null;
+        type: 'sleep' | 'reject' | 'eat' | null;
         end: number | null;
     } | null;
 };
@@ -43,7 +44,7 @@ const checkRejection = (state: GameState, stat: number, limit: number) => {
     if (stat >= limit) {
         state.action = {
             type: 'reject',
-            end: state.tickCount + 2,
+            end: state.tickCount + 1,
         };
         return true;
     }
@@ -92,6 +93,10 @@ const gameSlice = createSlice({
             if (state.action) return;
             if (checkRejection(state, state.hunger, MAX_HUNGER)) return;
             state.hunger = Math.min(MAX_HUNGER, state.hunger + 1);
+            state.action = {
+                type: 'eat',
+                end: state.tickCount + EATLENGTH,
+            };
         },
         lights: state => {
             if (state.action) return;
