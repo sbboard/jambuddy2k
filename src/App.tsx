@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import { useAppSelector } from './app/hooks';
 import { Debug } from './components/debug/Debug';
 import { End } from './components/end/End';
