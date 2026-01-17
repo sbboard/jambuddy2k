@@ -1,5 +1,6 @@
 import { feedPet, restPet } from '../../../store/gameSlice';
 import { useAppDispatch } from '../../../app/hooks';
+import './Controls.scss';
 
 export const Controls = () => {
     const dispatch = useAppDispatch();
@@ -9,13 +10,13 @@ export const Controls = () => {
                 onClick={() => dispatch(feedPet())}
                 className="action-button feed"
             >
-                Feed
+                F
             </button>
             <button
                 onClick={() => dispatch(restPet())}
                 className="action-button rest"
             >
-                Rest
+                R
             </button>
         </div>
     );
