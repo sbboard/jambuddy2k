@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { incrementStats } from '../../store/gameSlice';
 import { useAppDispatch } from '../../app/hooks';
 import { MS_PER_TICK } from '../../const/rules';
+import './Pet.scss'
 
 export const Pet = () => {
     const dispatch = useAppDispatch();
@@ -19,9 +20,9 @@ export const Pet = () => {
     }, [dispatch]);
 
     return (
-        <>
+        <div className='shell'>
             <Screen />
             <Controls />
-        </>
+        </div>
     );
 };
