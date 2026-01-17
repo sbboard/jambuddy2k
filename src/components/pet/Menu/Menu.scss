@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Micro+5&display=swap');
+
 .menu {
     background-color: #c4b8bd;
     position: absolute;
@@ -20,12 +22,16 @@
         div {
             display: flex;
             justify-content: center;
+            padding-top: 0px;
+            box-sizing: border-box;
+            line-height: 0;
             align-items: center;
             border: 1px solid black;
-            height: 4px;
-            font-size: 3px;
-            width: 4px;
-            opacity: .15;
+            height: 6px;
+            font-size: 8px;
+            width: 6px;
+            opacity: 0.15;
+            font-family: "Micro 5", sans-serif;
         }
     }
 

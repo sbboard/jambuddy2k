@@ -8,6 +8,7 @@ import {
     SLEEPLENGTH,
     STAGE_ONE_EVOLVE,
     STAGETWOEVOLVE,
+    STARTING_HUNGER,
 } from '../const/rules';
 
 type GameState = {
@@ -24,7 +25,7 @@ type GameState = {
 };
 
 const initialState: GameState = {
-    hunger: MAX_HUNGER,
+    hunger: STARTING_HUNGER,
     sleep: HOURS_PER_DAY,
     health: MAX_HEALTH,
     age: 0,
