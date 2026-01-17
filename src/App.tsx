@@ -10,7 +10,7 @@ export const App = () => {
     return (
         <div className="App">
             <Debug />
-            {health ? <Pet /> : <End />}
+            {health !== 666 ? <Pet /> : <End />}
         </div>
     );
 };

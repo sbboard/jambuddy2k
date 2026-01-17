@@ -4,9 +4,8 @@ import { useEffect } from 'react';
 import { incrementStats } from '../../store/gameSlice';
 import { useAppDispatch } from '../../app/hooks';
 import { MS_PER_TICK } from '../../const/rules';
-import { BottomMenu } from '../pet/BottomMenu/BottomMenu';
+import { Menu } from './Menu/Menu'
 import './Pet.scss'
-import { TopMenu } from './TopMenu/TopMenu';
 
 export const Pet = () => {
     const dispatch = useAppDispatch();
@@ -23,9 +22,9 @@ export const Pet = () => {
 
     return (
         <div className='shell'>
-            <TopMenu />
+            <Menu placement="top" />
             <Screen />
-            <BottomMenu />
+            <Menu placement="bottom" />
             <Controls />
         </div>
     );

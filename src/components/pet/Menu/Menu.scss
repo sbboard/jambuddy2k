@@ -1,0 +1,43 @@
+.menu {
+    background-color: #c4b8bd;
+    position: absolute;
+    width: 32px;
+    box-sizing: border-box;
+    margin: auto;
+    font-size: 4px;
+    right: 0;
+    left: 0;
+    padding: 1px;
+    height: 8px;
+    line-height: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    &.top {
+        top: 24px;
+
+        div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid black;
+            height: 4px;
+            font-size: 3px;
+            width: 4px;
+            opacity: .15;
+        }
+    }
+
+    &.bottom {
+        top: 48px;
+        font-size: 6px;
+
+        svg {
+            opacity: .15;
+            transition: opacity 0.1s;
+
+        }
+
+    }
+}
