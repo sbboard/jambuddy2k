@@ -45,6 +45,7 @@
         svg {
             opacity: .15;
             transition: opacity 0.1s;
+            transform: rotate(-10deg);
 
             &.selected {
                 opacity: 1;
