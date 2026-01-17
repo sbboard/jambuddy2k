@@ -1,20 +1,34 @@
-import { feedPet, restPet } from '../../../store/gameSlice';
-import { useAppDispatch } from '../../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { menuItems, setCurrentSelection } from '../../../store/navigation';
 import './Controls.scss';
 
 export const Controls = () => {
     const dispatch = useAppDispatch();
+
+    const currentSelectionIndex = useAppSelector(state => state.navigation.currentSelectionIndex);
+    const currentItem = menuItems[currentSelectionIndex];
+
+    const handleSelect = () => {
+        if (currentItem && currentItem.action) dispatch(currentItem.action());
+    };
+
     return (
         <div className="actions">
             <button
-                onClick={() => dispatch(feedPet())}
-                className="action-button feed"
+                onClick={() => dispatch(setCurrentSelection('previous'))}
+                className="action-button"
             >
-                F
+                L
             </button>
             <button
-                onClick={() => dispatch(restPet())}
-                className="action-button rest"
+                onClick={() => handleSelect()}
+                className="action-button"
+            >
+                S
+            </button>
+            <button
+                onClick={() => dispatch(setCurrentSelection('next'))}
+                className="action-button"
             >
                 R
             </button>

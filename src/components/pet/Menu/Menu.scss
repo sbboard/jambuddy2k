@@ -43,6 +43,9 @@
             opacity: .15;
             transition: opacity 0.1s;
 
+            &.selected {
+                opacity: 1;
+            }
         }
 
     }

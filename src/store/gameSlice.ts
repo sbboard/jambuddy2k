@@ -88,12 +88,12 @@ const gameSlice = createSlice({
             if (state.age === MAX_AGE) state.health = 0;
             handleEvolution(state);
         },
-        feedPet: state => {
+        feed: state => {
             if (state.action) return;
             if (checkRejection(state, state.hunger, MAX_HUNGER)) return;
             state.hunger = Math.min(MAX_HUNGER, state.hunger + 1);
         },
-        restPet: state => {
+        lights: state => {
             if (state.action) return;
             const limit = HOURS_PER_DAY - SLEEPLENGTH;
             if (checkRejection(state, state.sleep, limit)) return;
@@ -105,5 +105,5 @@ const gameSlice = createSlice({
     },
 });
 
-export const { incrementStats, feedPet, restPet } = gameSlice.actions;
+export const { incrementStats, feed, lights } = gameSlice.actions;
 export default gameSlice.reducer;
