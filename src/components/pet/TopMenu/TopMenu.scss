@@ -1,0 +1,30 @@
+.top-menu {
+    margin: auto;
+    position: absolute;
+    font-size: 4px;
+    margin: auto;
+    right: 0;
+    left: 0;
+    padding: 1px;
+    width: 30px;
+    height: 6px;
+    line-height: 0;
+    top: 48px;
+    display: flex;
+    justify-content: space-around;
+    top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        vertical-align: middle;
+        border: 1px solid black;
+        height: 4px;
+        font-size: 3px;
+        width: 4px;
+    }
+}

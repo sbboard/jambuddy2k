@@ -6,6 +6,7 @@ import { useAppDispatch } from '../../app/hooks';
 import { MS_PER_TICK } from '../../const/rules';
 import { BottomMenu } from '../pet/BottomMenu/BottomMenu';
 import './Pet.scss'
+import { TopMenu } from './TopMenu/TopMenu';
 
 export const Pet = () => {
     const dispatch = useAppDispatch();
@@ -22,6 +23,7 @@ export const Pet = () => {
 
     return (
         <div className='shell'>
+            <TopMenu />
             <Screen />
             <BottomMenu />
             <Controls />
