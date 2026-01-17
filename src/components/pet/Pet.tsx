@@ -6,9 +6,11 @@ import { useAppDispatch } from '../../app/hooks';
 import { MS_PER_TICK } from '../../const/rules';
 import { Menu } from './Menu/Menu'
 import './Pet.scss'
+import useScale from '../../hooks/useScale';
 
 export const Pet = () => {
     const dispatch = useAppDispatch();
+    const { scaleValue } = useScale();
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -21,7 +23,7 @@ export const Pet = () => {
     }, [dispatch]);
 
     return (
-        <div className='shell'>
+        <div className='shell' style={{ transform: `scale(${scaleValue})` }}>
             <img className='shell-image' src='/assets/shell/main_hq.png' alt='Pet Shell' />
             <Menu placement="top" />
             <Screen />

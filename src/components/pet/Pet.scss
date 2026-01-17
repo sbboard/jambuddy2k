@@ -3,8 +3,8 @@
     height: 78px;
     background: url('/assets/shell/main_hq.png');
     position: relative;
-    transform: scale(5);
     background-size: contain;
+    transition: transform 0.1s ease;
 
     .shell-image {
         position: absolute;
