@@ -7,10 +7,10 @@
     right: 0;
     margin: 0 auto;
     position: absolute;
-    background-size: contain;
+    background-size: cover;
 
     .scene {
-        mix-blend-mode: color-burn;
+        mix-blend-mode: multiply;
         position: absolute;
         bottom: 0;
         left: 0;

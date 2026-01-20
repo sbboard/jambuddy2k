@@ -7,9 +7,9 @@ export const MAX_HEALTH = 50;
 export const MAX_AGE = 80;
 
 //hunger data
-export const MAX_HUNGER = 8;
+export const MAX_HUNGER = 3;
 export const STARTING_HUNGER = MAX_HUNGER - 1;
-export const MEALS_PER_DAY = 3;
+export const MEALS_PER_DAY = 8;
 export const EATLENGTH = 2;
 
 //bath data
