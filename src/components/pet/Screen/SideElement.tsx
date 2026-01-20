@@ -4,11 +4,13 @@ export const SideElement = (props: { sprite?: string, type: 'prop' | 'status' })
 
 
     const sprite = useMemo(() => {
-        const root = props.type === 'prop' ? '/assets/props' : '/assets/statuses';
+        let root = '/assets';
+        if (!props.sprite) return `${root}/blank.png`;
+        root += props.type === 'prop' ? '/props' : '/statuses';
         return `${root}/${props.sprite}.png`;
     }, [props.sprite]);
 
     return (
-        <img className={`${props.sprite} ${props.sprite ? props.type : 'spacer'}`} src={sprite || '/assets/blank.png'} />
+        <img className={`${props.sprite || ''} ${props.sprite ? props.type : 'spacer'}`.trim()} src={sprite} />
     );
 };
