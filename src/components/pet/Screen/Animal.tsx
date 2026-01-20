@@ -7,7 +7,8 @@ export const Animal = (props: { gameState: GameState }) => {
     const image = useMemo(() => {
         let mood: Moods = 'normal';
         if (sleep <= SLEEPLENGTH || hunger <= 1) mood = 'sad';
-        if (action?.type) mood = action.type;
+        if (action?.type === 'bath') mood = 'normal';
+        else if (action?.type) mood = action.type;
         return `/assets/pets/${String(stage)}/${mood}.png`;
     }, [hunger, sleep, health, stage, action]);
 
@@ -22,6 +23,6 @@ export const Animal = (props: { gameState: GameState }) => {
     }, [petSize]);
 
     return (
-        <img className='pet' style={petStyle} src={image} alt="Pet" />
+        <img className={`pet ${action?.type}`} style={petStyle} src={image} alt="Pet" />
     );
 };

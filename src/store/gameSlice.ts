@@ -1,14 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
+    BATHLENGTH,
+    BATHS_PER_DAY,
     EATLENGTH,
     HOURS_PER_DAY,
     MAX_AGE,
+    MAX_BATH,
     MAX_HEALTH,
     MAX_HUNGER,
     MEALS_PER_DAY,
     SLEEPLENGTH,
+    SLEEPS_PER_DAY,
     STAGE_ONE_EVOLVE,
     STAGETWOEVOLVE,
+    STARTING_BATH,
     STARTING_HUNGER,
 } from '../const/rules';
 
@@ -16,11 +21,12 @@ export type GameState = {
     hunger: number;
     sleep: number;
     age: number;
+    bath: number;
     health: number;
     stage: number;
     tickCount: number;
     action: {
-        type: 'sleep' | 'reject' | 'eat' | null;
+        type: 'sleep' | 'reject' | 'eat' | 'bath' | null;
         end: number | null;
     } | null;
 };
@@ -28,6 +34,7 @@ export type GameState = {
 const initialState: GameState = {
     hunger: STARTING_HUNGER,
     sleep: HOURS_PER_DAY,
+    bath: STARTING_BATH,
     health: MAX_HEALTH,
     age: 0,
     stage: 1,
@@ -71,14 +78,17 @@ const gameSlice = createSlice({
             }
 
             // Hourly stat changes
-            if (state.tickCount % 1 === 0) {
+            if (state.tickCount % SLEEPS_PER_DAY === 0) {
                 state.sleep = Math.max(0, state.sleep - 1);
             }
-            if (state.tickCount % (HOURS_PER_DAY / MEALS_PER_DAY) === 0) {
+            if (state.tickCount % MEALS_PER_DAY === 0) {
                 state.hunger = Math.max(0, state.hunger - 1);
             }
             if (state.tickCount % HOURS_PER_DAY === 0) {
                 state.age = Math.min(MAX_AGE, state.age + 1);
+            }
+            if (state.tickCount % BATHS_PER_DAY === 0) {
+                state.bath = Math.max(0, state.bath - 1);
             }
 
             // Overall health
@@ -86,6 +96,7 @@ const gameSlice = createSlice({
                 state.health = Math.max(0, state.health - 1);
             }
             if (state.sleep === 0) state.health = Math.max(0, state.health - 1);
+            if (state.bath === 0) state.health = Math.max(0, state.health - 1);
             if (state.age === MAX_AGE) state.health = 0;
             handleEvolution(state);
         },
@@ -102,13 +113,24 @@ const gameSlice = createSlice({
             if (state.action) return;
             const limit = HOURS_PER_DAY - SLEEPLENGTH;
             if (checkRejection(state, state.sleep, limit)) return;
+            let length = Math.max(SLEEPLENGTH, 12 - state.sleep);
             state.action = {
                 type: 'sleep',
-                end: state.tickCount + SLEEPLENGTH,
+                end: state.tickCount + length,
+            };
+        },
+        bath: state => {
+            if (state.action) return;
+            const limit = MAX_BATH / 2;
+            if (checkRejection(state, state.bath, limit)) return;
+            state.bath = MAX_BATH;
+            state.action = {
+                type: 'bath',
+                end: state.tickCount + BATHLENGTH,
             };
         },
     },
 });
 
-export const { incrementStats, feed, lights } = gameSlice.actions;
+export const { incrementStats, feed, lights, bath } = gameSlice.actions;
 export default gameSlice.reducer;

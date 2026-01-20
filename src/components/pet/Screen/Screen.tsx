@@ -8,22 +8,22 @@ import { Background } from './Background';
 
 export const Screen = () => {
     const gameState = useAppSelector(state => state.game);
-    const { hunger, sleep, action } = gameState;
+    const { hunger, sleep, action, bath } = gameState;
 
     const prop = useMemo(() => {
-        const root = '/assets/props';
-        if (action?.type === 'eat') return `${root}/food.png`;
+        if (action?.type === 'eat') return `food`;
+        if (action?.type === 'bath') return `tub`;
         return;
     }, [action]);
 
     const status = useMemo(() => {
-        const root = '/assets/statuses';
         if (prop) return;
-        if (action?.type === 'sleep') return `${root}/zzz.png`;
-        if (sleep <= SLEEPLENGTH) return `${root}/tired.png`;
-        if (hunger <= 1) return `${root}/hungry.png`;
+        if (action?.type === 'sleep') return `zzz`;
+        if (sleep <= SLEEPLENGTH) return `tired`;
+        if (hunger <= 1) return `hungry`;
+        if (bath <= 12) return `dirty`;
         return;
-    }, [hunger, sleep, action, prop]);
+    }, [hunger, sleep, action, prop, bath]);
 
     return (
         <div className="screen">

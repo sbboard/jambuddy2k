@@ -24,6 +24,13 @@
         img {
             image-rendering: pixelated;
 
+            &.pet {
+                &.bath {
+                    position: absolute;
+                    top: 1px;
+                }
+            }
+
             &.bg {
                 position: absolute;
                 z-index: -1;
@@ -42,6 +49,11 @@
 
             &.prop {
                 margin-top: auto;
+
+                &.tub {
+                    position: absolute;
+                    z-index: 1;
+                }
             }
 
             &.spacer {

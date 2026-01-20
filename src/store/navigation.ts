@@ -1,6 +1,6 @@
-import { faBurger, faLightbulb, IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { faBath, faBurger, faLightbulb, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { feed, lights } from "./gameSlice";
+import { feed, lights, bath } from "./gameSlice";
 
 type MenuItem = {
     name: string;
@@ -13,6 +13,11 @@ export const menuItems: MenuItem[] = [
         name: 'feed',
         icon: faBurger,
         action: feed,
+    },
+    {
+        name: 'bath',
+        icon: faBath,
+        action: bath,
     },
     {
         name: 'lights',

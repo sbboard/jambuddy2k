@@ -2,7 +2,7 @@ import { useAppSelector } from '../../app/hooks';
 import './Debug.scss';
 
 export const Debug = () => {
-    const { hunger, sleep, age, health, stage, tickCount, action } = useAppSelector(
+    const { hunger, sleep, age, health, stage, tickCount, action, bath } = useAppSelector(
         state => state.game
     );
     return (
@@ -10,6 +10,7 @@ export const Debug = () => {
             <p>Hunger: {hunger}</p>
             <p>Sleep: {sleep}</p>
             <p>Age: {age}</p>
+            <p>Bath: {bath}</p>
             <p>Health: {health}</p>
             <p>Stage: {stage}</p>
             <p>Tick Count: {tickCount}</p>
