@@ -29,6 +29,10 @@
                     position: absolute;
                     top: 1px;
                 }
+
+                &.normal {
+                    animation: move 4s steps(8, jump-both) infinite alternate;
+                }
             }
 
             &.bg {
@@ -61,5 +65,15 @@
             }
         }
 
+    }
+}
+
+@keyframes move {
+    0% {
+        transform: translateX(-8px);
+    }
+
+    100% {
+        transform: translateX(8px);
     }
 }
