@@ -1,12 +1,12 @@
 export const SideElement = (props: { sprite?: string, type: 'prop' | 'status' }) => {
-    const sprite = () => {
-        let root = '/assets';
-        if (!props.sprite) return `${root}/blank.png`;
-        root += props.type === 'prop' ? '/props' : '/statuses';
-        return `${root}/${props.sprite}.png`;
-    };
-
     return (
-        <img className={`${props.sprite || ''} ${props.sprite ? props.type : 'spacer'}`.trim()} src={sprite()} />
+        <img
+            className={`${props.sprite || ''} ${props.sprite ? props.type : 'spacer'}`.trim()}
+            src={
+                props.sprite
+                    ? `/assets/${props.type === 'prop' ? 'props' : 'statuses'}/${props.sprite}.png`
+                    : '/assets/blank.png'
+            }
+        />
     );
 };

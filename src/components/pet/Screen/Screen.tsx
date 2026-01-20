@@ -8,7 +8,7 @@ import { Background } from './Background';
 
 export const Screen = () => {
     const gameState = useAppSelector(state => state.game);
-    const { hunger, sleep, action, bath } = gameState;
+    const { hunger, sleep, action, bath, health } = gameState;
 
     const prop = useMemo(() => {
         if (action?.type === 'eat') return `food`;
@@ -28,9 +28,9 @@ export const Screen = () => {
     return (
         <div className="screen">
             <div className="scene">
-                <SideElement sprite={prop} type="prop" />
-                <Animal gameState={gameState} />
-                <SideElement sprite={status} type="status" />
+                {health > 0 && <SideElement sprite={prop} type="prop" />}
+                {health > 0 ? <Animal gameState={gameState} /> : <img src='/assets/pets/rip.png' />}
+                {health > 0 && <SideElement sprite={status} type="status" />}
                 <Background action={action?.type as string | undefined} />
             </div>
         </div >

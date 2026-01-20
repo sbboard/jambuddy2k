@@ -27,12 +27,17 @@
             box-sizing: border-box;
             line-height: 0;
             align-items: center;
-            border: 1px solid black;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+            color: rgba(0, 0, 0, 0.15);
             height: 6px;
             font-size: 8px;
             width: 6px;
-            opacity: 0.15;
             font-family: "Micro 5", sans-serif;
+            transition: color 0.1s, border-color 0.1s;
+
+            &.active {
+                color: rgba(0, 0, 0, 1);
+            }
         }
     }
 
