@@ -21,48 +21,57 @@
         align-items: end;
         justify-content: center;
 
-        img {
-            image-rendering: pixelated;
+        &>div {
+            overflow: hidden;
+            position: relative;
 
-            &.pet {
-                &.bath {
-                    position: absolute;
-                    top: 1px;
-                }
-
-                &.normal {
-                    animation: move 8s steps(4, start) infinite;
-                }
-            }
-
-            &.bg {
+            img {
+                image-rendering: pixelated;
                 position: absolute;
-                z-index: -1;
+                top: 0;
+                animation: animate 1s steps(1, start) infinite;
+            }
+        }
+
+        .propWrap {
+            margin-top: auto;
+            height: 8px;
+            width: 8px;
+
+            &.tub {
+                position: absolute;
+                z-index: 1;
             }
 
-            &.status,
-            &.prop,
-            &.spacer {
-                padding: 0 1px;
-                background-color: white;
-            }
-
-            &.status {
-                margin-bottom: auto;
-            }
-
-            &.prop {
-                margin-top: auto;
-
-                &.tub {
-                    position: absolute;
-                    z-index: 1;
-                }
-            }
-
-            &.spacer {
+            .spacer {
                 opacity: 0;
             }
+        }
+
+        .petWrap {
+            &.bath {
+                position: absolute;
+                top: 1px;
+                animation: none;
+            }
+
+            &.normal {
+                animation: move 8s steps(4, start) infinite;
+            }
+
+        }
+
+        .statusWrap {
+            margin-bottom: auto;
+            height: 8px;
+            width: 8px;
+        }
+
+        .bgWrap {
+            position: absolute;
+            z-index: -1;
+            height: 16px;
+            width: 34px;
         }
 
     }
@@ -95,5 +104,15 @@
 
     100% {
         transform: translateX(0px) rotateY(0deg);
+    }
+}
+
+@keyframes animate {
+    0% {
+        top: 0;
+    }
+
+    50% {
+        top: -100%;
     }
 }

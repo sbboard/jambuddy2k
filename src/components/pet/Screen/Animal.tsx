@@ -28,6 +28,8 @@ export const Animal = (props: { gameState: GameState }) => {
     }, [petSize]);
 
     return (
-        <img className={`pet ${mood}`.trim()} style={petStyle} src={image} alt="Pet" />
+        <div className={`petWrap ${mood}`.trim()} style={petStyle}>
+            <img src={image} alt="Pet" />
+        </div>
     );
 };
