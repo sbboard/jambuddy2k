@@ -3,11 +3,11 @@ import { type Moods, SLEEPLENGTH } from '../../../const/rules';
 import { GameState } from '../../../store/gameSlice';
 
 export const Animal = (props: { gameState: GameState }) => {
-    const { hunger, sleep, stage, action } = props.gameState;
+    const { hunger, sleep, stage, action, bath } = props.gameState;
 
     const mood: Moods = useMemo(() => {
         let mood: Moods = 'normal';
-        if (sleep <= SLEEPLENGTH || hunger <= 1) mood = 'sad';
+        if (sleep <= SLEEPLENGTH || hunger <= 1 || bath <= 12) mood = 'sad';
         if (action?.type === 'bath') mood = 'normal';
         else if (action?.type) mood = action.type;
         return mood;
