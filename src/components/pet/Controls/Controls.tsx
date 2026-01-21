@@ -1,21 +1,15 @@
 import { useEffect } from 'react';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { useAppDispatch } from '../../../app/hooks';
+import { store } from '../../../app/store';
 import { menuItems, setCurrentSelection } from '../../../store/navigation';
 import './Controls.scss';
 
 export const Controls = () => {
     const dispatch = useAppDispatch();
-
-    const currentSelectionIndex = useAppSelector(state => state.navigation.currentSelectionIndex);
-    const currentItem = menuItems[currentSelectionIndex];
-
-    const handleSelect = () => {
-        if (currentItem && currentItem.action) dispatch(currentItem.action());
-    };
-
     // Map arrow keys to corresponding button actions
     const handleKeyDown = (event: KeyboardEvent) => {
         event.preventDefault();
+
         switch (event.key) {
             case 'ArrowLeft':
                 dispatch(setCurrentSelection('previous'));
@@ -23,14 +17,11 @@ export const Controls = () => {
             case 'ArrowRight':
                 dispatch(setCurrentSelection('next'));
                 break;
-            case 'ArrowDown':
-                handleSelect();
+            case 'ArrowDown': {
+                const index = store.getState().navigation.currentSelectionIndex;
+                dispatch(menuItems[index].action());
                 break;
-            case 'Enter':
-                handleSelect();
-                break;
-            default:
-                break;
+            }
         }
     };
 
