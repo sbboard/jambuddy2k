@@ -5,7 +5,7 @@ function useScale() {
     const [scaleValue, setScaleValue] = useState(1);
 
     function updateScale(newScale: number) {
-        setScaleValue(newScale);
+        setScaleValue(prev => (prev !== newScale ? newScale : prev));
     }
 
     function checkScale() {
