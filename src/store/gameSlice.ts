@@ -129,8 +129,9 @@ const gameSlice = createSlice({
                 end: state.tickCount + BATHLENGTH,
             };
         },
+        resetGame: state => Object.assign(state, initialState),
     },
 });
 
-export const { incrementStats, feed, lights, bath } = gameSlice.actions;
+export const { incrementStats, feed, lights, bath, resetGame } = gameSlice.actions;
 export default gameSlice.reducer;
