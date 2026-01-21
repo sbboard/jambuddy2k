@@ -15,7 +15,6 @@ export const Zoom = () => {
         if (scaleValue > lastScale.current) setZoom('zoom-in');
         else if (scaleValue < lastScale.current) setZoom('zoom-out');
         lastScale.current = scaleValue;
-
     }, [scaleValue]);
 
     return (
