@@ -42,11 +42,12 @@
             margin-top: auto;
             height: 8px;
             width: 8px;
+            z-index: 2;
+            position: relative;
 
             &.tub {
-                position: absolute;
-                z-index: 1;
                 width: 16px;
+                position: absolute;
             }
 
             .spacer {
@@ -55,14 +56,17 @@
         }
 
         .petWrap {
-            &.bath {
-                position: absolute;
-                top: 1px;
-                animation: none;
-            }
+            position: relative;
+            z-index: 1;
 
             &.normal {
                 animation: move 8s steps(4, start) infinite;
+            }
+
+            &.bath {
+                animation: none;
+                position: absolute;
+                top: 1px;
             }
 
         }
