@@ -40,7 +40,7 @@ export const Screen = () => {
         <div className="screen">
             <div className="scene">
                 {health > 0 && <SideElement sprite={prop} type="prop" />}
-                {health > 0 ? <Animal gameState={gameState} /> : <img src='/assets/pets/rip.png' />}
+                {health > 0 ? <Animal gameState={gameState} /> : <div className='ripWrap'><img src='/assets/pets/rip.png' /></div>}
                 {health > 0 && <SideElement sprite={status} type="status" />}
                 <Background action={action?.type as string | undefined} />
             </div>
