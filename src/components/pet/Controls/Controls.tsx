@@ -41,22 +41,27 @@ export const Controls = () => {
         };
     }, []);
 
+    function emitKeyEvent(key: string) {
+        const event = new KeyboardEvent('keydown', { key });
+        window.dispatchEvent(event);
+    }
+
     return (
         <div className="actions">
             <button
-                onClick={() => dispatch(setCurrentSelection('previous'))}
+                onClick={() => emitKeyEvent('ArrowLeft')}
                 className="action-button"
             >
                 L
             </button>
             <button
-                onClick={() => handleSelect()}
+                onClick={() => emitKeyEvent('ArrowDown')}
                 className="action-button"
             >
                 S
             </button>
             <button
-                onClick={() => dispatch(setCurrentSelection('next'))}
+                onClick={() => emitKeyEvent('ArrowRight')}
                 className="action-button"
             >
                 R

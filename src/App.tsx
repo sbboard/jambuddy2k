@@ -2,14 +2,17 @@ import './App.scss';
 import { Zoom } from './components/zoom/Zoom';
 import { Debug } from './components/debug/Debug';
 import { Pet } from './components/pet/Pet';
+import useDebug from './hooks/useDebug';
 
 export const App = () => {
 
+    const { debugActive } = useDebug();
+
     return (
         <div className="App">
-            <Debug />
+            {debugActive && <Debug />}
             <Pet />
-            <Zoom/>
+            <Zoom />
         </div>
     );
 };
