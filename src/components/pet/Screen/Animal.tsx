@@ -11,7 +11,7 @@ export const Animal = (props: { gameState: GameState }) => {
         if (action?.type === 'bath') mood = 'normal';
         else if (action?.type) mood = action.type;
         return mood;
-    }, [hunger, sleep, action]);
+    }, [hunger, sleep, action, bath]);
 
     const image = useMemo(() => {
         return `/assets/pets/${String(stage)}/${mood}.png`;
