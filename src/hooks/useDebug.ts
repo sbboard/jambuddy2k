@@ -12,16 +12,21 @@ function useDebug() {
         }
         if (JSON.stringify(currentPattern.current) === JSON.stringify(debugPattern)) {
             setDebugActive(true);
+            sessionStorage.setItem('debugActive', 'true');
             window.removeEventListener('keydown', checkPattern);
         }
     };
 
     useEffect(() => {
+        if (sessionStorage.getItem('debugActive') === 'true' && !debugActive) {
+            setDebugActive(true);
+            return;
+        }
         window.addEventListener('keydown', checkPattern);
         return () => {
             window.removeEventListener('keydown', checkPattern);
         };
-    }, []);
+    }, [debugActive]);
 
     return { debugActive };
 }
