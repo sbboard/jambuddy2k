@@ -31,7 +31,7 @@
                 }
 
                 &.normal {
-                    animation: move 4s steps(8, jump-both) infinite alternate;
+                    animation: move 8s steps(4, start) infinite;
                 }
             }
 
@@ -70,10 +70,30 @@
 
 @keyframes move {
     0% {
-        transform: translateX(-8px);
+        transform: translateX(0px) rotateY(0deg);
+    }
+
+    25% {
+        transform: translateX(-8px) rotateY(0deg);
+    }
+
+    25.01% {
+        transform: translateX(-8px) rotateY(180deg);
+    }
+
+    50% {
+        transform: translateX(0px) rotateY(180deg);
+    }
+
+    75% {
+        transform: translateX(8px) rotateY(180deg);
+    }
+
+    75.01% {
+        transform: translateX(8px) rotateY(0deg);
     }
 
     100% {
-        transform: translateX(8px);
+        transform: translateX(0px) rotateY(0deg);
     }
 }
