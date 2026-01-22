@@ -7,10 +7,20 @@
     transition: transform 0.5s ease;
     z-index: 1;
 
+    .shadow {
+        width: 36px;
+        height: 35px;
+        top: 23px;
+        left: 15px;
+        z-index: 1;
+        position: absolute;
+        background: linear-gradient(180deg, rgb(0 0 0 / 25%), transparent);
+    }
+
     .shell-image {
         position: absolute;
         top: 0;
-        z-index: 1;
+        z-index: 2;
         pointer-events: none;
         width: 100%;
     }

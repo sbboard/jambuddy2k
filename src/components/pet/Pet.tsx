@@ -25,6 +25,7 @@ export const Pet = () => {
     return (
         <div className='shell' style={{ transform: `scale(${scaleValue})` }}>
             <img className='shell-image' src='/assets/shell/main_hq.png' alt='Pet Shell' />
+            <div className='shadow' />
             <Menu placement="top" />
             <Screen />
             <Menu placement="bottom" />

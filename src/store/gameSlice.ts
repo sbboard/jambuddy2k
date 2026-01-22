@@ -2,13 +2,13 @@ import { createSlice } from '@reduxjs/toolkit';
 import {
     BATHLENGTH,
     BATHS_PER_DAY,
+    EAT_DECREASE_RATE,
     EATLENGTH,
     HOURS_PER_DAY,
     MAX_AGE,
     MAX_BATH,
     MAX_HEALTH,
     MAX_HUNGER,
-    MEALS_PER_DAY,
     SLEEPLENGTH,
     SLEEPS_PER_DAY,
     STAGE_ONE_EVOLVE,
@@ -81,7 +81,7 @@ const gameSlice = createSlice({
             if (state.tickCount % SLEEPS_PER_DAY === 0) {
                 state.sleep = Math.max(0, state.sleep - 1);
             }
-            if (state.tickCount % MEALS_PER_DAY === 0) {
+            if (state.tickCount % EAT_DECREASE_RATE === 0) {
                 state.hunger = Math.max(0, state.hunger - 1);
             }
             if (state.tickCount % HOURS_PER_DAY === 0) {
