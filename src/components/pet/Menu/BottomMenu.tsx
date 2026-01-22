@@ -12,7 +12,10 @@ export const BottomMenu = () => {
         <>
             {
                 menuItems.map((item, i) => (
-                    <FontAwesomeIcon key={item.name} icon={item.icon} className={i === currentSelectionIndex && !isDead ? 'selected' : ''} />
+                    <div className='menu-icon' key={item.name}>
+                        <FontAwesomeIcon icon={item.icon} className={i === currentSelectionIndex && !isDead ? 'selected' : ''} />
+                        <div className='star' />
+                    </div>
                 ))
             }
         </>

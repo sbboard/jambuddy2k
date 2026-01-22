@@ -47,13 +47,41 @@
         padding-bottom: 1px;
         padding-top: 0;
 
-        svg {
-            opacity: .15;
-            transition: opacity 0.1s;
-            transform: rotate(-10deg);
+        .menu-icon {
+            height: 6px;
+            width: 6px;
+            position: relative;
 
-            &.selected {
-                opacity: 1;
+            .star {
+                width: 8px;
+                height: 8px;
+                position: absolute;
+                top: -1px;
+                z-index: 0;
+                left: -1px;
+                background-color: #d8d27d;
+                mask-image: url('/assets/shell/star.svg');
+                mask-repeat: no-repeat;
+                mask-position: center;
+                mask-size: contain;
+                transform: rotate(-10deg);
+            }
+
+            &:nth-of-type(even) .star {
+                background-color: #d29d99;
+            }
+
+            svg {
+                opacity: .25;
+                transition: opacity 0.1s;
+                transform: rotate(-10deg);
+                position: relative;
+                z-index: 1;
+                margin-left: -1px;
+
+                &.selected {
+                    opacity: 1;
+                }
             }
         }
 
