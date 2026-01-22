@@ -35,7 +35,7 @@ const initialState: GameState = {
     hunger: STARTING_HUNGER,
     sleep: HOURS_PER_DAY,
     bath: STARTING_BATH,
-    health: 1,
+    health: MAX_HEALTH,
     age: 0,
     stage: 1,
     tickCount: 0,
