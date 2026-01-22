@@ -21,6 +21,7 @@ export const Screen = () => {
     const status = useMemo(() => {
         if (prop) return;
         if (action?.type === 'sleep') return `zzz`;
+        if (action?.type === 'reject') return `annoyed`;
         if (sleep <= SLEEPLENGTH) return `tired`;
         if (hunger <= 1) return `hungry`;
         if (bath <= 12) return `dirty`;
