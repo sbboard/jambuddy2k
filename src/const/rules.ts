@@ -10,7 +10,7 @@ export const MAX_AGE = 80;
 export const MAX_HUNGER = 3;
 export const STARTING_HUNGER = MAX_HUNGER - 1;
 export const EATLENGTH = 2;
-export const EAT_DECREASE_RATE = 16;
+export const EAT_DECREASE_RATE = 10;
 
 //bath data
 export const MAX_BATH = 48;
@@ -24,7 +24,7 @@ export const STAGETWOEVOLVE = 10;
 
 //sleep data
 export const SLEEPLENGTH = 8;
-export const SLEEPS_PER_DAY = 4;
+export const SLEEPS_PER_DAY = 3;
 
 export const MOODS = [
     'normal',
