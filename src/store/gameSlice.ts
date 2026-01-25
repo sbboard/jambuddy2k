@@ -48,14 +48,13 @@ const handleEvolution = (state: GameState) => {
 };
 
 const checkRejection = (state: GameState, stat: number, limit: number) => {
-    if (stat >= limit) {
-        state.action = {
-            type: 'reject',
-            end: state.tickCount + 1,
-        };
-        return true;
-    }
-    return false;
+    if (stat < limit) return false;
+    state.action = {
+        type: 'reject',
+        end: state.tickCount + 1,
+    };
+    state.health = Math.max(0, state.health - 1);
+    return true;
 };
 
 const gameSlice = createSlice({
@@ -113,7 +112,7 @@ const gameSlice = createSlice({
             if (state.action) return;
             const limit = HOURS_PER_DAY - SLEEPLENGTH;
             if (checkRejection(state, state.sleep, limit)) return;
-            let length = Math.max(SLEEPLENGTH, 12 - state.sleep);
+            const length = Math.max(SLEEPLENGTH, 12 - state.sleep);
             state.action = {
                 type: 'sleep',
                 end: state.tickCount + length,
@@ -133,5 +132,6 @@ const gameSlice = createSlice({
     },
 });
 
-export const { incrementStats, feed, lights, bath, resetGame } = gameSlice.actions;
+export const { incrementStats, feed, lights, bath, resetGame } =
+    gameSlice.actions;
 export default gameSlice.reducer;
