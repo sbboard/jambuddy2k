@@ -1,8 +1,8 @@
 import { Screen } from './Screen/Screen';
 import { Controls } from './Controls/Controls';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { incrementStats } from '../../store/gameSlice';
-import { useAppDispatch } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { MS_PER_TICK } from '../../const/rules';
 import { Menu } from './Menu/Menu';
 import './Pet.scss';
@@ -11,16 +11,21 @@ import useScale from '../../hooks/useScale';
 export const Pet = () => {
     const dispatch = useAppDispatch();
     const { scaleValue } = useScale();
+    const { action } = useAppSelector(state => state.game);
+    const interval: React.RefObject<NodeJS.Timeout | null> = useRef(null);
+
+    const triggerTick = useCallback(() => {
+        dispatch(incrementStats());
+        interval.current = setTimeout(triggerTick, MS_PER_TICK);
+    }, [dispatch]);
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            dispatch(incrementStats());
-        }, MS_PER_TICK);
-
+        clearTimeout(interval.current ?? 0);
+        interval.current = setTimeout(triggerTick, MS_PER_TICK);
         return () => {
-            clearInterval(interval);
+            clearTimeout(interval.current ?? 0);
         };
-    }, [dispatch]);
+    }, [action, triggerTick]);
 
     return (
         <div
