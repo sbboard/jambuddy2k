@@ -6,31 +6,32 @@ import './Controls.scss';
 
 export const Controls = () => {
     const dispatch = useAppDispatch();
-    // Map arrow keys to corresponding button actions
-    const handleKeyDown = (event: KeyboardEvent) => {
-        event.preventDefault();
-
-        switch (event.key) {
-            case 'ArrowLeft':
-                dispatch(setCurrentSelection('previous'));
-                break;
-            case 'ArrowRight':
-                dispatch(setCurrentSelection('next'));
-                break;
-            case 'ArrowDown': {
-                const index = store.getState().navigation.currentSelectionIndex;
-                dispatch(menuItems[index].action());
-                break;
-            }
-        }
-    };
 
     useEffect(() => {
+        // Map arrow keys to corresponding button actions
+        const handleKeyDown = (event: KeyboardEvent) => {
+            event.preventDefault();
+            switch (event.key) {
+                case 'ArrowLeft':
+                    dispatch(setCurrentSelection('previous'));
+                    break;
+                case 'ArrowRight':
+                    dispatch(setCurrentSelection('next'));
+                    break;
+                case 'ArrowDown': {
+                    const index =
+                        store.getState().navigation.currentSelectionIndex;
+                    dispatch(menuItems[index].action());
+                    break;
+                }
+            }
+        };
+
         window.addEventListener('keydown', handleKeyDown);
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
-    }, []);
+    }, [dispatch]);
 
     function emitKeyEvent(key: string) {
         const event = new KeyboardEvent('keydown', { key });
@@ -40,19 +41,25 @@ export const Controls = () => {
     return (
         <div className="actions">
             <button
-                onClick={() => emitKeyEvent('ArrowLeft')}
+                onClick={() => {
+                    emitKeyEvent('ArrowLeft');
+                }}
                 className="action-button"
             >
                 L
             </button>
             <button
-                onClick={() => emitKeyEvent('ArrowDown')}
+                onClick={() => {
+                    emitKeyEvent('ArrowDown');
+                }}
                 className="action-button"
             >
                 S
             </button>
             <button
-                onClick={() => emitKeyEvent('ArrowRight')}
+                onClick={() => {
+                    emitKeyEvent('ArrowRight');
+                }}
                 className="action-button"
             >
                 R

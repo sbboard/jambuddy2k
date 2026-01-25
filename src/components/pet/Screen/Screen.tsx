@@ -2,7 +2,7 @@ import { useEffect, useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import './Screen.scss';
 import { SLEEPLENGTH } from '../../../const/rules';
-import { SideElement } from './SideElement'
+import { SideElement } from './SideElement';
 import { Animal } from './Animal';
 import { Background } from './Background';
 import { resetGame } from '../../../store/gameSlice';
@@ -28,23 +28,29 @@ export const Screen = () => {
         return;
     }, [hunger, sleep, action, prop, bath]);
 
-    const reset = (event: KeyboardEvent) => {
-        if (event.key === 'ArrowDown') dispatch(resetGame())
-    };
-
     useEffect(() => {
+        const reset = (event: KeyboardEvent) => {
+            if (event.key === 'ArrowDown') dispatch(resetGame());
+        };
+
         if (health <= 0) window.addEventListener('keydown', reset);
         else window.removeEventListener('keydown', reset);
-    }, [health]);
+    }, [dispatch, health]);
 
     return (
         <div className="screen">
             <div className="scene">
                 {health > 0 && <SideElement sprite={prop} type="prop" />}
-                {health > 0 ? <Animal gameState={gameState} /> : <div className='ripWrap'><img src='/assets/pets/rip.png' /></div>}
+                {health > 0 ? (
+                    <Animal gameState={gameState} />
+                ) : (
+                    <div className="ripWrap">
+                        <img src="/assets/pets/rip.png" />
+                    </div>
+                )}
                 {health > 0 && <SideElement sprite={status} type="status" />}
                 <Background action={action?.type as string | undefined} />
             </div>
-        </div >
+        </div>
     );
 };

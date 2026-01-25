@@ -4,8 +4,8 @@ import { useEffect } from 'react';
 import { incrementStats } from '../../store/gameSlice';
 import { useAppDispatch } from '../../app/hooks';
 import { MS_PER_TICK } from '../../const/rules';
-import { Menu } from './Menu/Menu'
-import './Pet.scss'
+import { Menu } from './Menu/Menu';
+import './Pet.scss';
 import useScale from '../../hooks/useScale';
 
 export const Pet = () => {
@@ -23,9 +23,16 @@ export const Pet = () => {
     }, [dispatch]);
 
     return (
-        <div className='shell' style={{ transform: `scale(${scaleValue})` }}>
-            <img className='shell-image' src='/assets/shell/main_hq.png' alt='Pet Shell' />
-            <div className='shadow' />
+        <div
+            className="shell"
+            style={{ transform: `scale(${scaleValue.toString()})` }}
+        >
+            <img
+                className="shell-image"
+                src="/assets/shell/main_hq.png"
+                alt="Pet Shell"
+            />
+            <div className="shadow" />
             <Menu placement="top" />
             <Screen />
             <Menu placement="bottom" />
