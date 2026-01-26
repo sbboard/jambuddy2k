@@ -25,7 +25,7 @@ export const STATS: Stats = {
         max: 3,
         limit: 2,
         critical: 1,
-        decreaseRate: 10,
+        decreaseRate: 12,
         actionLength: 2,
     },
     bath: {
