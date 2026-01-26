@@ -7,6 +7,8 @@ import {
     STAGETWOEVOLVE,
 } from '../const/rules';
 
+type ActionType = 'sleep' | 'reject' | 'hunger' | 'bath' | null;
+
 export type GameState = {
     hunger: number;
     sleep: number;
@@ -16,7 +18,7 @@ export type GameState = {
     stage: number;
     tickCount: number;
     action: {
-        type: 'sleep' | 'reject' | 'eat' | 'bath' | null;
+        type: ActionType;
         end: number | null;
     } | null;
 };
@@ -47,33 +49,22 @@ const checkRejection = (state: GameState, stat: number, limit: number) => {
     return true;
 };
 
-const interact = (state: GameState, interaction: string) => {
+const interact = (state: GameState, interaction: keyof GameState) => {
     if (state.action) return;
-    if (interaction === 'feed') {
-        if (checkRejection(state, state.hunger, STATS.hunger.limit)) return;
-        state.hunger = Math.min(STATS.hunger.max, state.hunger + 1);
-        state.action = {
-            type: 'eat',
-            end: state.tickCount + STATS.hunger.actionLength,
-        };
-    } else if (interaction === 'lights') {
-        if (checkRejection(state, state.sleep, STATS.sleep.limit)) return;
-        const length = Math.max(
-            STATS.sleep.actionLength,
-            STATS.sleep.max - state.sleep
-        );
-        state.action = {
-            type: 'sleep',
-            end: state.tickCount + length,
-        };
-    } else if (interaction === 'bath') {
-        if (checkRejection(state, state.bath, STATS.bath.limit)) return;
-        state.bath = STATS.bath.max;
-        state.action = {
-            type: 'bath',
-            end: state.tickCount + STATS.bath.actionLength,
-        };
+    if (typeof state[interaction] !== 'number') return;
+    if (checkRejection(state, state[interaction], STATS[interaction].limit)) {
+        return;
     }
+
+    let end = state.tickCount + STATS[interaction].actionLength;
+    if (interaction === 'hunger') {
+        state.hunger = Math.min(STATS.hunger.max, state.hunger + 1);
+    } else if (interaction === 'sleep') {
+        end = Math.max(STATS.sleep.max - state.sleep + state.tickCount, end);
+    } else if (interaction === 'bath') {
+        state.bath = STATS.bath.max;
+    }
+    state.action = { type: interaction as ActionType, end };
 };
 
 const gameSlice = createSlice({
@@ -118,11 +109,11 @@ const gameSlice = createSlice({
             if (state.age === MAX_AGE) state.health = 0;
             handleEvolution(state);
         },
-        feed: state => {
-            interact(state, 'feed');
+        hunger: state => {
+            interact(state, 'hunger');
         },
-        lights: state => {
-            interact(state, 'lights');
+        sleep: state => {
+            interact(state, 'sleep');
         },
         bath: state => {
             interact(state, 'bath');
@@ -131,6 +122,6 @@ const gameSlice = createSlice({
     },
 });
 
-export const { incrementStats, feed, lights, bath, resetGame } =
+export const { incrementStats, hunger, sleep, bath, resetGame } =
     gameSlice.actions;
 export default gameSlice.reducer;

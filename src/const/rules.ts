@@ -52,7 +52,7 @@ export const STATS: Stats = {
 export const STAGE_ONE_EVOLVE = 3;
 export const STAGETWOEVOLVE = 10;
 
-export const MOODS = ['normal', 'eat', 'sad', 'sleep', 'reject'] as const;
+export const MOODS = ['normal', 'hunger', 'sad', 'sleep', 'reject'] as const;
 
 export type Moods = (typeof MOODS)[number];
 export const PET_STAGES = [1, 2, 3];

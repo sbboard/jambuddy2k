@@ -13,7 +13,7 @@ export const Screen = () => {
     const { hunger, sleep, action, bath, health } = gameState;
 
     const prop = useMemo(() => {
-        if (action?.type === 'eat') return `food`;
+        if (action?.type === 'hunger') return `food`;
         if (action?.type === 'bath') return `tub`;
         return;
     }, [action]);

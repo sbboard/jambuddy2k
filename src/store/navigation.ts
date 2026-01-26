@@ -9,7 +9,7 @@ import {
     type PayloadAction,
     type ActionCreatorWithoutPayload,
 } from '@reduxjs/toolkit';
-import { feed, lights, bath } from './gameSlice';
+import { hunger, sleep, bath } from './gameSlice';
 
 type MenuItem = {
     name: string;
@@ -19,9 +19,9 @@ type MenuItem = {
 
 export const menuItems: MenuItem[] = [
     {
-        name: 'feed',
+        name: 'hunger',
         icon: faBurger,
-        action: feed,
+        action: hunger,
     },
     {
         name: 'bath',
@@ -29,9 +29,9 @@ export const menuItems: MenuItem[] = [
         action: bath,
     },
     {
-        name: 'lights',
+        name: 'sleep',
         icon: faLightbulb,
-        action: lights,
+        action: sleep,
     },
 ] as const;
 
