@@ -1,38 +1,58 @@
 //time data
-export const HOURS_PER_DAY = 24;
 export const MS_PER_TICK = 2000;
 
 //general health
 export const MAX_HEALTH = 50;
-export const MAX_AGE = 80;
+export const MAX_AGE = 20;
 
-//hunger data
-export const MAX_HUNGER = 3;
-export const STARTING_HUNGER = MAX_HUNGER - 1;
-export const EATLENGTH = 2;
-export const EAT_DECREASE_RATE = 10;
+type Stats = Record<
+    string,
+    {
+        name: string;
+        initial: number;
+        max: number;
+        limit: number; // min value before user can trigger associated action
+        critical: number; // value at which status is shown
+        decreaseRate: number; // in ticks
+        actionLength: number; // in ticks
+    }
+>;
 
-//bath data
-export const MAX_BATH = 48;
-export const STARTING_BATH = MAX_BATH - 12;
-export const BATHLENGTH = 3;
-export const BATHS_PER_DAY = 3;
+export const STATS: Stats = {
+    hunger: {
+        name: 'hunger',
+        initial: 2,
+        max: 3,
+        limit: 2,
+        critical: 1,
+        decreaseRate: 10,
+        actionLength: 2,
+    },
+    bath: {
+        name: 'bath',
+        initial: 36,
+        max: 48,
+        limit: 36,
+        critical: 12,
+        decreaseRate: 8,
+        actionLength: 3,
+    },
+    sleep: {
+        name: 'sleep',
+        initial: 24,
+        max: 24,
+        limit: 16,
+        critical: 8,
+        decreaseRate: 15,
+        actionLength: 8,
+    },
+};
 
 //evolution data
 export const STAGE_ONE_EVOLVE = 3;
 export const STAGETWOEVOLVE = 10;
 
-//sleep data
-export const SLEEPLENGTH = 8;
-export const SLEEPS_PER_DAY = 3;
-
-export const MOODS = [
-    'normal',
-    'eat',
-    'sad',
-    'sleep',
-    'reject'
-] as const;
+export const MOODS = ['normal', 'eat', 'sad', 'sleep', 'reject'] as const;
 
 export type Moods = (typeof MOODS)[number];
 export const PET_STAGES = [1, 2, 3];

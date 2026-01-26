@@ -4,13 +4,17 @@ import {
     faLightbulb,
     type IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import {
+    createSlice,
+    type PayloadAction,
+    type ActionCreatorWithoutPayload,
+} from '@reduxjs/toolkit';
 import { feed, lights, bath } from './gameSlice';
 
 type MenuItem = {
     name: string;
     icon: IconDefinition;
-    action: () => void;
+    action: ActionCreatorWithoutPayload;
 };
 
 export const menuItems: MenuItem[] = [

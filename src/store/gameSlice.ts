@@ -1,20 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
-    BATHLENGTH,
-    BATHS_PER_DAY,
-    EAT_DECREASE_RATE,
-    EATLENGTH,
-    HOURS_PER_DAY,
+    STATS,
     MAX_AGE,
-    MAX_BATH,
     MAX_HEALTH,
-    MAX_HUNGER,
-    SLEEPLENGTH,
-    SLEEPS_PER_DAY,
     STAGE_ONE_EVOLVE,
     STAGETWOEVOLVE,
-    STARTING_BATH,
-    STARTING_HUNGER,
 } from '../const/rules';
 
 export type GameState = {
@@ -32,9 +22,9 @@ export type GameState = {
 };
 
 const initialState: GameState = {
-    hunger: STARTING_HUNGER,
-    sleep: HOURS_PER_DAY,
-    bath: STARTING_BATH,
+    hunger: STATS.hunger.initial,
+    sleep: STATS.sleep.initial,
+    bath: STATS.bath.initial,
     health: MAX_HEALTH,
     age: 0,
     stage: 1,
@@ -48,13 +38,42 @@ const handleEvolution = (state: GameState) => {
 };
 
 const checkRejection = (state: GameState, stat: number, limit: number) => {
-    if (stat < limit) return false;
+    if (stat <= limit) return false;
     state.action = {
         type: 'reject',
         end: state.tickCount + 1,
     };
     state.health = Math.max(0, state.health - 1);
     return true;
+};
+
+const interact = (state: GameState, interaction: string) => {
+    if (state.action) return;
+    if (interaction === 'feed') {
+        if (checkRejection(state, state.hunger, STATS.hunger.limit)) return;
+        state.hunger = Math.min(STATS.hunger.max, state.hunger + 1);
+        state.action = {
+            type: 'eat',
+            end: state.tickCount + STATS.hunger.actionLength,
+        };
+    } else if (interaction === 'lights') {
+        if (checkRejection(state, state.sleep, STATS.sleep.limit)) return;
+        const length = Math.max(
+            STATS.sleep.actionLength,
+            STATS.sleep.max - state.sleep
+        );
+        state.action = {
+            type: 'sleep',
+            end: state.tickCount + length,
+        };
+    } else if (interaction === 'bath') {
+        if (checkRejection(state, state.bath, STATS.bath.limit)) return;
+        state.bath = STATS.bath.max;
+        state.action = {
+            type: 'bath',
+            end: state.tickCount + STATS.bath.actionLength,
+        };
+    }
 };
 
 const gameSlice = createSlice({
@@ -69,7 +88,7 @@ const gameSlice = createSlice({
             }
 
             if (state.action?.type === 'sleep') {
-                state.sleep = Math.min(HOURS_PER_DAY, state.sleep + 1);
+                state.sleep = Math.min(STATS.sleep.max, state.sleep + 1);
                 if (state.hunger > 0) {
                     state.health = Math.min(MAX_HEALTH, state.health + 1);
                 }
@@ -77,16 +96,16 @@ const gameSlice = createSlice({
             }
 
             // Hourly stat changes
-            if (state.tickCount % SLEEPS_PER_DAY === 0) {
+            if (state.tickCount % STATS.sleep.decreaseRate === 0) {
                 state.sleep = Math.max(0, state.sleep - 1);
             }
-            if (state.tickCount % EAT_DECREASE_RATE === 0) {
+            if (state.tickCount % STATS.hunger.decreaseRate === 0) {
                 state.hunger = Math.max(0, state.hunger - 1);
             }
-            if (state.tickCount % HOURS_PER_DAY === 0) {
+            if (state.tickCount % STATS.sleep.decreaseRate === 0) {
                 state.age = Math.min(MAX_AGE, state.age + 1);
             }
-            if (state.tickCount % BATHS_PER_DAY === 0) {
+            if (state.tickCount % STATS.bath.decreaseRate === 0) {
                 state.bath = Math.max(0, state.bath - 1);
             }
 
@@ -100,33 +119,13 @@ const gameSlice = createSlice({
             handleEvolution(state);
         },
         feed: state => {
-            if (state.action) return;
-            if (checkRejection(state, state.hunger, MAX_HUNGER)) return;
-            state.hunger = Math.min(MAX_HUNGER, state.hunger + 1);
-            state.action = {
-                type: 'eat',
-                end: state.tickCount + EATLENGTH,
-            };
+            interact(state, 'feed');
         },
         lights: state => {
-            if (state.action) return;
-            const limit = HOURS_PER_DAY - SLEEPLENGTH;
-            if (checkRejection(state, state.sleep, limit)) return;
-            const length = Math.max(SLEEPLENGTH, 12 - state.sleep);
-            state.action = {
-                type: 'sleep',
-                end: state.tickCount + length,
-            };
+            interact(state, 'lights');
         },
         bath: state => {
-            if (state.action) return;
-            const limit = MAX_BATH / 2;
-            if (checkRejection(state, state.bath, limit)) return;
-            state.bath = MAX_BATH;
-            state.action = {
-                type: 'bath',
-                end: state.tickCount + BATHLENGTH,
-            };
+            interact(state, 'bath');
         },
         resetGame: state => Object.assign(state, initialState),
     },

@@ -1,13 +1,18 @@
 import { useMemo } from 'react';
-import { type Moods, SLEEPLENGTH } from '../../../const/rules';
-import { GameState } from '../../../store/gameSlice';
+import { type Moods, STATS } from '../../../const/rules';
+import type { GameState } from '../../../store/gameSlice';
 
 export const Animal = (props: { gameState: GameState }) => {
     const { hunger, sleep, stage, action, bath } = props.gameState;
 
     const mood: Moods = useMemo(() => {
         let mood: Moods = 'normal';
-        if (sleep <= SLEEPLENGTH || hunger <= 1 || bath <= 12) mood = 'sad';
+        if (
+            sleep <= STATS.sleep.critical ||
+            hunger <= STATS.hunger.critical ||
+            bath <= STATS.bath.critical
+        )
+            mood = 'sad';
         if (action?.type === 'bath') mood = 'normal';
         else if (action?.type) mood = action.type;
         return mood;
@@ -24,11 +29,17 @@ export const Animal = (props: { gameState: GameState }) => {
     }, [stage]);
 
     const petStyle = useMemo(() => {
-        return { width: `${petSize}px`, height: `${petSize}px` };
+        return {
+            width: `${petSize.toString()}px`,
+            height: `${petSize.toString()}px`,
+        };
     }, [petSize]);
 
     return (
-        <div className={`petWrap ${mood} ${action?.type ?? ''}`.trim()} style={petStyle}>
+        <div
+            className={`petWrap ${mood} ${action?.type ?? ''}`.trim()}
+            style={petStyle}
+        >
             <img src={image} alt="Pet" />
         </div>
     );

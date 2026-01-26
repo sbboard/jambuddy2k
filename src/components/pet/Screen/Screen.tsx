@@ -1,11 +1,11 @@
 import { useEffect, useMemo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import './Screen.scss';
-import { SLEEPLENGTH } from '../../../const/rules';
 import { SideElement } from './SideElement';
 import { Animal } from './Animal';
 import { Background } from './Background';
 import { resetGame } from '../../../store/gameSlice';
+import { STATS } from '../../../const/rules';
 
 export const Screen = () => {
     const dispatch = useAppDispatch();
@@ -22,9 +22,9 @@ export const Screen = () => {
         if (prop) return;
         if (action?.type === 'sleep') return `zzz`;
         if (action?.type === 'reject') return `annoyed`;
-        if (sleep <= SLEEPLENGTH) return `tired`;
-        if (hunger <= 1) return `hungry`;
-        if (bath <= 12) return `dirty`;
+        if (sleep <= STATS.sleep.critical) return `tired`;
+        if (hunger <= STATS.hunger.critical) return `hungry`;
+        if (bath <= STATS.bath.critical) return `dirty`;
         return;
     }, [hunger, sleep, action, prop, bath]);
 
