@@ -1,12 +1,17 @@
-import { faBath, faBurger, faLightbulb, IconDefinition } from "@fortawesome/free-solid-svg-icons";
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { feed, lights, bath } from "./gameSlice";
+import {
+    faBath,
+    faBurger,
+    faLightbulb,
+    type IconDefinition,
+} from '@fortawesome/free-solid-svg-icons';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import { feed, lights, bath } from './gameSlice';
 
 type MenuItem = {
     name: string;
     icon: IconDefinition;
-    action: () => any;
-}
+    action: () => void;
+};
 
 export const menuItems: MenuItem[] = [
     {
@@ -34,13 +39,19 @@ const navSlice = createSlice({
     name: 'navigation',
     initialState,
     reducers: {
-        setCurrentSelection: (state, direction: PayloadAction<'next' | 'previous'>) => {
+        setCurrentSelection: (
+            state,
+            direction: PayloadAction<'next' | 'previous'>
+        ) => {
             if (direction.payload === 'next') {
-                state.currentSelectionIndex = (state.currentSelectionIndex + 1) % menuItems.length;
+                state.currentSelectionIndex =
+                    (state.currentSelectionIndex + 1) % menuItems.length;
             } else {
-                state.currentSelectionIndex = (state.currentSelectionIndex - 1 + menuItems.length) % menuItems.length;
+                state.currentSelectionIndex =
+                    (state.currentSelectionIndex - 1 + menuItems.length) %
+                    menuItems.length;
             }
-        }
+        },
     },
 });
 
