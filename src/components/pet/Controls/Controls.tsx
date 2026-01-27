@@ -1,37 +1,6 @@
-import { useEffect } from 'react';
-import { useAppDispatch } from '../../../app/hooks';
-import { store } from '../../../app/store';
-import { menuItems, setCurrentSelection } from '../../../store/navigation';
 import './Controls.scss';
 
 export const Controls = () => {
-    const dispatch = useAppDispatch();
-
-    useEffect(() => {
-        // Map arrow keys to corresponding button actions
-        const handleKeyDown = (event: KeyboardEvent) => {
-            event.preventDefault();
-            switch (event.key) {
-                case 'ArrowLeft':
-                    dispatch(setCurrentSelection('previous'));
-                    break;
-                case 'ArrowRight':
-                    dispatch(setCurrentSelection('next'));
-                    break;
-                case 'ArrowDown': {
-                    const index =
-                        store.getState().navigation.currentSelectionIndex;
-                    dispatch(menuItems[index].action());
-                    break;
-                }
-            }
-        };
-
-        window.addEventListener('keydown', handleKeyDown);
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-        };
-    }, [dispatch]);
 
     function emitKeyEvent(key: string) {
         const event = new KeyboardEvent('keydown', { key });
