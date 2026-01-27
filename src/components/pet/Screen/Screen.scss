@@ -38,23 +38,6 @@
             height: 16px;
         }
 
-        .propWrap {
-            margin-top: auto;
-            height: 8px;
-            width: 8px;
-            z-index: 2;
-            position: relative;
-
-            &.tub {
-                width: 16px;
-                position: absolute;
-            }
-
-            .spacer {
-                opacity: 0;
-            }
-        }
-
         .petWrap {
             position: relative;
             z-index: 1;
@@ -69,12 +52,6 @@
                 top: 1px;
             }
 
-        }
-
-        .statusWrap {
-            margin-bottom: auto;
-            height: 8px;
-            width: 8px;
         }
 
         .bgWrap {
