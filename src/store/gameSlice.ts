@@ -34,11 +34,22 @@ const initialState: GameState = {
     action: null,
 };
 
+/**
+ * Handle pet evolution based on age
+ * @param state The current game state
+ */
 const handleEvolution = (state: GameState) => {
     if (state.age === STAGE_ONE_EVOLVE) state.stage = 2;
     if (state.age === STAGETWOEVOLVE) state.stage = 3;
 };
 
+/**
+ * Check if the interaction should be rejected due to stat being above limit
+ * @param state The current game state
+ * @param stat The current value of the stat to check
+ * @param limit The limit above which the interaction is rejected
+ * @returns Whether the interaction was rejected
+ */
 const checkRejection = (state: GameState, stat: number, limit: number) => {
     if (stat <= limit) return false;
     state.action = {
@@ -49,6 +60,11 @@ const checkRejection = (state: GameState, stat: number, limit: number) => {
     return true;
 };
 
+/**
+ * Handle interaction with a specific stat
+ * @param state The current game state
+ * @param interaction The stat being interacted with
+ */
 const interact = (state: GameState, interaction: keyof GameState) => {
     if (state.action) return;
     if (typeof state[interaction] !== 'number') return;
