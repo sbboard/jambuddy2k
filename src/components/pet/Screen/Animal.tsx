@@ -11,10 +11,9 @@ export const Animal = (props: { gameState: GameState }) => {
             sleep <= STATS.sleep.critical ||
             hunger <= STATS.hunger.critical ||
             bath <= STATS.bath.critical
-        )
+        ) {
             mood = 'sad';
-        if (action?.type === 'bath') mood = 'normal';
-        else if (action?.type) mood = action.type;
+        } else if (action?.type) mood = action.type;
         return mood;
     }, [hunger, sleep, action, bath]);
 
@@ -36,10 +35,7 @@ export const Animal = (props: { gameState: GameState }) => {
     }, [petSize]);
 
     return (
-        <div
-            className={`petWrap ${mood} ${action?.type ?? ''}`.trim()}
-            style={petStyle}
-        >
+        <div className={`petWrap ${mood}`.trim()} style={petStyle}>
             <img src={image} alt="Pet" />
         </div>
     );
